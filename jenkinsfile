@@ -2,14 +2,37 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+
+stage('git-clone') {
+            steps {
+
+            git clone git@github.com:ruslan133/sql.git
+
+            sshagent(['${credos}']) { 
+                   sh '''       
+                    ssh -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no ruslan@192.168.0.118 <<DEOF
+                    rm -rf /home/ruslan/lab-jenk 
+                    mkdir /home/ruslan/lab-jenk
+                    DEOF
+                    '''.stripIndent()
+               }
+
+               sshagent(['${credos}']) { 
+                   sh '''       
+                    scp -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no  /sql/bashscript ruslan@192.168.0.118:/home/ruslan/lab-jenk 
+                    scp -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no  /sql/Dockerfile ruslan@192.168.0.118:/home/ruslan/lab-jenk
+                    '''
+               }
+            }
+        stage('docker-deploy') {
             steps {
                
                sshagent(['${credos}']) { 
                    sh '''       
-                    ssh -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no ruslan@192.168.0.118 <<DEOF
-
-                    curl -s -I http://localhost | grep HTTP
+                   ssh -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no ruslan@192.168.0.118 <<DEOF
+                    cd /home/ruslan/lab-jenk 
+                    sudo chmod 770 /home/ruslan/lab-jenk/bashscript
+                    sudo ./bashscript
                     DEOF
                     '''.stripIndent()
                }
