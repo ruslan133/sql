@@ -34,12 +34,12 @@ sshagent(['${credos}']) {
 sh '''       
 ssh -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no ruslan@192.168.0.118 << DEOF
 
-                    cd /home/ruslan/lab-jenk 
-                    sudo chmod 770 /home/ruslan/lab-jenk/bashscript
-                    sudo ./bashscript
+cd /home/ruslan/lab-jenk 
+sudo chmod 770 /home/ruslan/lab-jenk/bashscript
+sudo ./bashscript
 
-                    DEOF
-                    '''.stripIndent()
+DEOF
+'''.stripIndent()
                }
             }
         }
