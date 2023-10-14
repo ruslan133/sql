@@ -6,10 +6,11 @@ pipeline {
 stage('git-clone') {
             steps {
 
-            git clone git@github.com:ruslan133/sql.git
+            
 
             sshagent(['${credos}']) { 
-                   sh '''       
+                   sh ''' 
+                    git clone git@github.com:ruslan133/sql.git
                     ssh -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no ruslan@192.168.0.118 <<DEOF
                     rm -rf /home/ruslan/lab-jenk 
                     mkdir /home/ruslan/lab-jenk
