@@ -10,6 +10,7 @@ stage('git-clone') {
 
             sshagent(['${credos}']) { 
                    sh ''' 
+                    rm -rf sql
                     git clone git@github.com:ruslan133/sql.git
                     ssh -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no ruslan@192.168.0.118 <<DEOF
                     rm -rf /home/ruslan/lab-jenk 
