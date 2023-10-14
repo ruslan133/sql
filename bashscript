@@ -12,3 +12,5 @@ fi
 
 sudo docker build . -f Dockerfile --tag nginx-lab
 sudo docker run --name cont-nginx-lab -p 8081:80 -d nginx-lab
+
+exit
