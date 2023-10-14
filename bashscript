@@ -9,3 +9,6 @@ if [ -n "$test_cont" ]; then
    # echo "not empty"
    sudo docker rm -f cont-nginx-lab
 fi
+
+sudo docker build . -f Dockerfile --tag nginx-lab
+sudo docker run --name cont-nginx-lab -p 8081:80 -d nginx-lab
