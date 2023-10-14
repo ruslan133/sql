@@ -1,0 +1,11 @@
+#!/bin/bash
+test_img=$(sudo docker images -a | grep nginx-lab)
+test_cont=$(sudo docker ps | grep cont-nginx-lab)
+if [ -n "$test_img" ]; then
+   # echo "not empty"
+   sudo docker image rm -f nginx-lab
+fi
+if [ -n "$test_cont" ]; then
+   # echo "not empty"
+   sudo docker rm -f cont-nginx-lab
+fi
