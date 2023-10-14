@@ -30,9 +30,9 @@ stage('git-clone') {
         stage('docker-deploy') {
             steps {
                
-               sshagent(['${credos}']) { 
-                   sh '''       
-                   ssh -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no ruslan@192.168.0.118 <<DEOF
+sshagent(['${credos}']) { 
+sh '''       
+ssh -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no ruslan@192.168.0.118 << DEOF
 
                     cd /home/ruslan/lab-jenk 
                     sudo chmod 770 /home/ruslan/lab-jenk/bashscript
