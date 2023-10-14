@@ -23,6 +23,7 @@ stage('git-clone') {
                     scp -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no  /sql/bashscript ruslan@192.168.0.118:/home/ruslan/lab-jenk 
                     scp -o "UserKnownHostsFile=/dev/null"  -o StrictHostKeyChecking=no  /sql/Dockerfile ruslan@192.168.0.118:/home/ruslan/lab-jenk
                     '''
+                 }
                }
             }
         stage('docker-deploy') {
